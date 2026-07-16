@@ -4,6 +4,7 @@ import { getInventory } from "../services/api";
 
 function Inventory() {
 
+  
   const [inventory, setInventory] = useState([]);
   const [search, setSearch] = useState("");
 

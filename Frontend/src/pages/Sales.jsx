@@ -11,6 +11,7 @@ import {
 
 function Sales() {
 
+  
   const [sales, setSales] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -27,6 +28,8 @@ function Sales() {
 
       const response = await getSales();
 
+      console.log("Sales Page:", response.data);
+
       setSales(response.data);
 
     } catch (err) {
@@ -41,22 +44,26 @@ function Sales() {
 
     try {
 
-      await addSale(saleData);
+        saleData.user = {
+            userId: Number(localStorage.getItem("userId"))
+        };
 
-      loadSales();
+        await addSale(saleData);
 
-      setShowModal(false);
+        loadSales();
+
+        setShowModal(false);
 
     } catch (err) {
 
-      alert(
-        err.response?.data?.Message ||
-        "Unable to save sale"
-      );
+        alert(
+            err.response?.data?.Message ||
+            "Unable to save sale"
+        );
 
     }
 
-  };
+};
 
   const deleteSale = async () => {
 
@@ -78,17 +85,16 @@ function Sales() {
 
   };
 
-  const filteredSales = sales.filter((sale) =>
-
-    sale.saleItems.some((item) =>
-
-      item.medicine.medicineName
-        .toLowerCase()
-        .includes(search.toLowerCase())
-
-    )
-
-  );
+  const filteredSales =
+  search.trim() === ""
+    ? sales
+    : sales.filter((sale) =>
+        sale.saleItems.some((item) =>
+          item.medicine.medicineName
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+      );
 
   return (
 
@@ -152,11 +158,11 @@ function Sales() {
 
               {
 
-                filteredSales.map((sale) => (
+                filteredSales.map((sale, index) => (
 
                   <tr key={sale.saleId}>
 
-                    <td>{sale.saleId}</td>
+                    <td>{index + 1}</td>
 
                     <td>{sale.saleDate}</td>
 

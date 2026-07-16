@@ -11,6 +11,7 @@ import {
 } from "../services/supplierService";
 
 function Supplier() {
+  
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -35,17 +36,27 @@ function Supplier() {
 
   // ADD
 
-  const handleAddSupplier = async (supplier) => {
-    try {
-      await addSupplier(supplier);
+ const handleAddSupplier = async (supplier) => {
 
-      loadSuppliers();
+  try {
 
-      setShowModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    supplier.user = {
+      userId: Number(localStorage.getItem("userId"))
+    };
+
+    await addSupplier(supplier);
+
+    loadSuppliers();
+
+    setShowModal(false);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
 
   // EDIT
 

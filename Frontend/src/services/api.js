@@ -81,3 +81,9 @@ export const cancelSale = (id) =>
 //-------------Inventory------------
 export const getInventory = () =>
   api.get("/medicine/getall");
+
+
+//--------Delete Account------------
+export const deleteMyAccount = () => {
+  return api.delete("/user/delete");
+};

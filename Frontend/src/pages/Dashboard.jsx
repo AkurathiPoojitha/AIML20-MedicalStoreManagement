@@ -5,6 +5,8 @@ import api from "../services/api";
 
 function Dashboard() {
 
+  
+
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -17,11 +19,16 @@ function Dashboard() {
 
       const response = await api.get("/sale/getall");
 
+      console.log("Dashboard:", response.data);
+
       setSales(response.data);
+
 
     } catch (error) {
 
       console.log(error);
+
+      setSales(response.data);
 
     }
 
@@ -63,7 +70,7 @@ function Dashboard() {
 
                     <tr key={sale.saleId}>
 
-                      <td>{sale.saleId}</td>
+                      <td>{index + 1}</td>
                       <td>{sale.saleDate}</td>
                       <td>₹ {sale.totalAmount}</td>
                       <td>{sale.status}</td>

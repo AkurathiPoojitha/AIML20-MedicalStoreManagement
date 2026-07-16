@@ -6,11 +6,7 @@ function Navbar() {
 
       <h2>Medical Store Management</h2>
 
-      <div className="admin">
-
-        👨‍⚕️ Admin
-
-      </div>
+      
 
     </div>
   );

@@ -35,13 +35,21 @@ function Login() {
 
       if (response.status === 200) {
 
+        const user = await api.get("/user/me", {
+            auth: {
+                username: loginData.username,
+                password: loginData.password
+            }
+        });
+
+        localStorage.setItem("userId", user.data.userId);
         localStorage.setItem("username", loginData.username);
         localStorage.setItem("password", loginData.password);
 
         alert("Login Successful!");
 
         navigate("/dashboard");
-      }
+    }
 
     } catch (error) {
 
@@ -57,7 +65,7 @@ function Login() {
 
       <div className="login-box">
 
-        <h2>Medical Store Management</h2>
+        <h2>Login to MediCare</h2>
 
         <form onSubmit={handleLogin}>
 

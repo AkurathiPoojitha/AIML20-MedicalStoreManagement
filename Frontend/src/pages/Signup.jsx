@@ -48,7 +48,7 @@ function Signup() {
 
       <div className="login-box">
 
-        <h2>Create Account</h2>
+        <h2>Create Account to use MediCare</h2>
 
         <form onSubmit={handleSignup}>
 
@@ -79,22 +79,6 @@ function Signup() {
               onChange={handleChange}
               placeholder="Enter Password"
             />
-
-          </div>
-
-          <div className="mb-3">
-
-            <label>Role</label>
-
-            <select
-              className="form-select"
-              name="role"
-              value={user.role}
-              onChange={handleChange}
-            >
-              <option value="ADMIN">ADMIN</option>
-              <option value="STAFF">STAFF</option>
-            </select>
 
           </div>
 

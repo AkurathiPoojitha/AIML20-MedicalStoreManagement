@@ -6,6 +6,7 @@ import api from "../services/api";
 
 function Medicine() {
 
+  
   const [medicines, setMedicines] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -38,15 +39,19 @@ function Medicine() {
 
   const addMedicine = (medicine) => {
 
-    api.post("/medicine/add", medicine)
-      .then(() => {
-
-        loadMedicines();
-
-      })
-      .catch((err) => console.log(err));
-
+  medicine.user = {
+    userId: Number(localStorage.getItem("userId"))
   };
+
+  api.post("/medicine/add", medicine)
+    .then(() => {
+
+      loadMedicines();
+
+    })
+    .catch((err) => console.log(err));
+
+};
 
   // UPDATE
 
